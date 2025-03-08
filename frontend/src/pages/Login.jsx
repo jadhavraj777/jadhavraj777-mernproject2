@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import "../App.css";
+import "../App.css"; // Import CSS
 
 const Login = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
@@ -18,15 +18,24 @@ const Login = ({ setIsLoggedIn }) => {
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/home/login", {
+      // Send login request to the backend API
+      const res = await axios.post("http://localhost:4000/login", {
         email: trimmedEmail,
         password: trimmedPassword,
       });
 
-      localStorage.setItem("username", res.data.username);
-      setIsLoggedIn(true);
-      navigate("/home");
+      console.log("Login Response:", res); // Log the full response for debugging
+
+      if (res.status === 200) {
+        // On successful login
+        localStorage.setItem("username", res.data.username);
+        setIsLoggedIn(true);
+        navigate("/home");  // Redirect to home page on successful login
+      } else {
+        alert("Invalid credentials, please try again.");
+      }
     } catch (error) {
+      console.error("Login Error:", error); // Log error for debugging
       alert(error.response?.data?.message || "Invalid Credentials");
     }
   };

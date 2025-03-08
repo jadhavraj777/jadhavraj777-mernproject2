@@ -26,19 +26,24 @@ const Register = ({ setIsLoggedIn }) => {
     }
 
     try {
-      // Send the registration request to the backend
-      await axios.post("http://localhost:3000/home/register", {
+      // Send the registration request to the backend API
+      const response = await axios.post("http://localhost:4000/register", {
         username: trimmedUsername,
         email: trimmedEmail,
         password: trimmedPassword,
       });
 
-      // If successful, store username and log the user in
-      localStorage.setItem("username", trimmedUsername);
-      setIsLoggedIn(true);
+      // If registration is successful
+      if (response.status === 200 || response.status === 201) {
+        // Store the username and log the user in
+        localStorage.setItem("username", trimmedUsername);
+        setIsLoggedIn(true);
 
-      // Redirect to home page
-      navigate("/home");
+        // Redirect to home page
+        navigate("/home");
+      } else {
+        alert("Registration failed. Please try again.");
+      }
     } catch (error) {
       // Display error message if registration fails
       const errorMessage = error.response?.data?.message || "Registration failed. Please try again.";

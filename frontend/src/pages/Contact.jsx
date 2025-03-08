@@ -16,7 +16,7 @@ const Contact = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch("http://localhost:3000/home/contact", { // ✅ Fixed URL
+      const response = await fetch("http://localhost:4000/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,8 +47,10 @@ const Contact = () => {
         <p className="contact-text">
           Have questions or feedback? We'd love to hear from you! Fill out the form below, and we'll get back to you as soon as possible.
         </p>
+        
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}
+        
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="form-group">
             <label htmlFor="name" className="form-label">
@@ -64,6 +66,7 @@ const Contact = () => {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="email" className="form-label">
               Email
@@ -78,6 +81,7 @@ const Contact = () => {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="message" className="form-label">
               Message
@@ -91,6 +95,7 @@ const Contact = () => {
               required
             />
           </div>
+
           <button type="submit" className="form-button" disabled={loading}>
             {loading ? "Sending..." : "Submit"}
           </button>

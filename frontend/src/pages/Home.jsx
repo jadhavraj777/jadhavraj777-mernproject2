@@ -28,7 +28,7 @@ const Home = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:3000/home/recipes"); // Replace with your API URL
+        const response = await fetch("http://localhost:4000/recipes"); // Adjusted endpoint for fetching recipes
         if (response.ok) {
           const data = await response.json();
           setRecipes(data);
@@ -47,10 +47,10 @@ const Home = () => {
       {/* Carousel Section */}
       <div id="carouselExample" className="carousel slide mt-3" data-bs-ride="carousel">
         <div className="carousel-inner">
-          {[
-            "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/cf/b9/a3/dum-gosht-biryani.jpg?w=900&h=500&s=1",
-            "https://t4.ftcdn.net/jpg/06/21/54/41/360_F_621544128_inBjLYomzXLGFiNVri9ebirH1MMJ7ige.jpg",
-            "https://truffle-assets.tastemadecontent.net/a2352212-vid55254-og-puranpoli-16x9.jpg",
+          {[ 
+            "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/cf/b9/a3/dum-gosht-biryani.jpg?w=900&h=500&s=1", 
+            "https://t4.ftcdn.net/jpg/06/21/54/41/360_F_621544128_inBjLYomzXLGFiNVri9ebirH1MMJ7ige.jpg", 
+            "https://truffle-assets.tastemadecontent.net/a2352212-vid55254-og-puranpoli-16x9.jpg" 
           ].map((image, index) => (
             <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
               <img
@@ -66,7 +66,7 @@ const Home = () => {
         {/* Carousel Caption for Tagline */}
         <div className="carousel-caption d-none d-md-block">
           <h2 style={{ color: "#0af3f7", textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}>
-            "Cook. Share. Inspire. Your Recipes, Our Community!" 
+            "Cook. Share. Inspire. Your Recipes, Our Community!"
           </h2>
         </div>
 
@@ -93,8 +93,8 @@ const Home = () => {
 
       {/* Card Section */}
       <div className="container mt-4">
-      <h2 className="bg-success text-white rounded-pill" style={styles.heading}>Choose From</h2>
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <h2 className="bg-success text-white rounded-pill" style={styles.heading}>Choose From</h2>
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
           {recipes.length === 0 ? (
             <p>No recipes available yet!</p>
           ) : (
@@ -102,7 +102,7 @@ const Home = () => {
               <div className="col" key={index}>
                 <div className="card h-100 shadow-sm border-0">
                   <img
-                    src={`http://localhost:3000/home${recipe.image}`} // Make sure the image URL is correct
+                    src={`http://localhost:4000${recipe.image}`} // Adjusted URL to match the backend image path
                     className="card-img-top"
                     alt={recipe.name}
                     style={styles.cardImage}

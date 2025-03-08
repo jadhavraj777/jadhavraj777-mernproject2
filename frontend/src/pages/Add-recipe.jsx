@@ -15,6 +15,10 @@ const AddRecipe = () => {
     note: "",
   });
 
+  // State for loading and error messages
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   // Handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +38,7 @@ const AddRecipe = () => {
     e.preventDefault();
 
     // Validate form inputs
-    if (!recipe.name || !recipe.ingredients || !recipe.procedure) {
+    if (!recipe.name || !recipe.ingredients || !recipe.procedure || !recipe.image) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -48,9 +52,10 @@ const AddRecipe = () => {
     formData.append("note", recipe.note);
 
     try {
+      setLoading(true); // Set loading state
       // Send POST request to your backend API
       const response = await axios.post(
-        "http://localhost:3000/home/add-recipe", // Adjusted endpoint
+        "http://localhost:4000/add-recipe", // Adjusted endpoint
         formData,
         {
           headers: {
@@ -78,7 +83,9 @@ const AddRecipe = () => {
     } catch (error) {
       // Handle error
       console.error("Error adding recipe:", error);
-      alert("Error adding recipe. Please try again.");
+      setError("Error adding recipe. Please try again.");
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -86,6 +93,9 @@ const AddRecipe = () => {
     <div className="add-recipe-container">
       <div className="add-recipe-box">
         <h1 className="add-recipe-title bg-success text-white rounded-pill">Add Your Recipe</h1>
+        
+        {error && <p className="error-message">{error}</p>}
+        
         <form onSubmit={handleSubmit} className="add-recipe-form">
           <div className="form-group">
             <label htmlFor="name" className="form-label">
@@ -102,8 +112,9 @@ const AddRecipe = () => {
               required
             />
           </div>
+
           <div className="form-group">
-            <label htmlFor="image" className="form-label">Upload Image</label>
+            <label htmlFor="image" className="form-label">Upload Image <span className="required">*</span></label>
             <input
               type="file"
               id="image"
@@ -111,8 +122,10 @@ const AddRecipe = () => {
               className="form-input"
               accept="image/*"
               onChange={handleImageChange}
+              required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="ingredients" className="form-label">
               Ingredients <span className="required">*</span>
@@ -127,6 +140,7 @@ const AddRecipe = () => {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="procedure" className="form-label">
               Procedure <span className="required">*</span>
@@ -141,6 +155,7 @@ const AddRecipe = () => {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="note" className="form-label">Note/Tip</label>
             <textarea
@@ -152,8 +167,9 @@ const AddRecipe = () => {
               onChange={handleInputChange}
             />
           </div>
-          <button type="submit" className="form-button btn-success rounded-pill">
-            Add Recipe
+
+          <button type="submit" className="form-button btn-success rounded-pill" disabled={loading}>
+            {loading ? "Adding..." : "Add Recipe"}
           </button>
         </form>
       </div>
