@@ -50,7 +50,7 @@ const AddRecipe = () => {
     try {
       // Send POST request to your backend API
       const response = await axios.post(
-        "http://localhost:4000/add-recipe", // Adjusted endpoint
+        "https://jadhavraj777-mernproject2.onrender.com/add-recipe", // Adjusted endpoint
         formData,
         {
           headers: {

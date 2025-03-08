@@ -28,7 +28,7 @@ const Home = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:4000/recipes"); // Replace with your API URL
+        const response = await fetch("https://jadhavraj777-mernproject2.onrender.com/recipes"); // Replace with your API URL
         if (response.ok) {
           const data = await response.json();
           setRecipes(data);
@@ -102,7 +102,7 @@ const Home = () => {
               <div className="col" key={index}>
                 <div className="card h-100 shadow-sm border-0">
                   <img
-                    src={`http://localhost:4000${recipe.image}`} // Make sure the image URL is correct
+                    src={`https://jadhavraj777-mernproject2.onrender.com${recipe.image}`} // Make sure the image URL is correct
                     className="card-img-top"
                     alt={recipe.name}
                     style={styles.cardImage}

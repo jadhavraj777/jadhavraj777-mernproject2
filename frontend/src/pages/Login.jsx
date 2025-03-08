@@ -18,7 +18,7 @@ const Login = ({ setIsLoggedIn }) => {
     }
 
     try {
-      const res = await axios.post("http://localhost:4000/login", {
+      const res = await axios.post("https://jadhavraj777-mernproject2.onrender.com/login", {
         email: trimmedEmail,
         password: trimmedPassword,
       });
