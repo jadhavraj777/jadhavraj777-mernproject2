@@ -27,7 +27,7 @@ const Register = ({ setIsLoggedIn }) => {
 
     try {
       // Send the registration request to the backend
-      await axios.post("https://jadhavraj777-mernproject2.onrender.com/register", {
+      await axios.post("http://localhost:3000/home/register", {
         username: trimmedUsername,
         email: trimmedEmail,
         password: trimmedPassword,
