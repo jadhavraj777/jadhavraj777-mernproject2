@@ -16,7 +16,7 @@ const Contact = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch("http://localhost:4000/contact", { // ✅ Fixed URL
+      const response = await fetch("https://jadhavraj777-mernproject2.onrender.com", { // ✅ Fixed URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",

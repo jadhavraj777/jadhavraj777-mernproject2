@@ -28,7 +28,7 @@ const Home = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:4000/recipes"); // Replace with your API URL
+        const response = await fetch("https://jadhavraj777-mernproject2.onrender.com"); // Replace with your API URL
         if (response.ok) {
           const data = await response.json();
           setRecipes(data);

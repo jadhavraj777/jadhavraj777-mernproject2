@@ -9,7 +9,7 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/recipes/${id}`);
+        const response = await fetch(`https://jadhavraj777-mernproject2.onrender.com/${id}`);
         if (response.ok) {
           const data = await response.json();
           setRecipe(data);
@@ -28,7 +28,7 @@ const RecipeDetail = () => {
   return (
     <div className="container">
       <h1>{recipe.name}</h1>
-      <img src={`http://localhost:4000${recipe.image}`} alt={recipe.name} className="img-fluid" />
+      <img src={`https://jadhavraj777-mernproject2.onrender.com${recipe.image}`} alt={recipe.name} className="img-fluid" />
       <h3>Ingredients:</h3>
       <ul>
         {recipe.ingredients.map((ingredient, index) => (
